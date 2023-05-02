@@ -1,18 +1,23 @@
 package com.anu.project.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
-@AllArgsConstructor
+
+@Builder
 @NoArgsConstructor
-public class UserDto {
+@AllArgsConstructor
+@ToString
+@Setter
+@Getter
+public class UserRegistrationDto {
 
-    private long id;
     private String name;
     private String email;
     private String password;
-    private String role;
     
 }
