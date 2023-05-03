@@ -19,5 +19,9 @@ public class UserRegistrationDto {
     private String name;
     private String email;
     private String password;
+    private String roles;
     
+    public String getRoles() {
+        return null;
+    }
 }

@@ -1,0 +1,17 @@
+### Create New Account
+
+POST http://localhost:8080/login HTTP/1.1 
+content-type: application/json
+
+{
+"name" : "abc", "email" : "abs@gmail.com", "password" : "abcd", "role" : "user"
+}
+
+### login 
+POST http://localhost:8080/login/ HTTP/1.1 
+content-type: application/json
+
+{
+
+"email" : "abcs@gmail.com", "password" : "abcd"
+}
