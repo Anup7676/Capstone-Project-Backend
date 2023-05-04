@@ -1,30 +1,42 @@
 package com.anu.project.service;
 
-import java.util.Arrays;
+import java.time.LocalDate;
+import java.util.Optional;
 
-
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-
-
 import com.anu.project.domain.User;
-import com.anu.project.dto.UserRegistrationDto;
+import com.anu.project.dto.CreateUserDto;
+import com.anu.project.dto.LoginDto;
+import com.anu.project.dto.UserDto;
+import com.anu.project.exception.UserNotFoundException;
 import com.anu.project.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository repository;
+    
+    @Override
+    public Integer signup(CreateUserDto dto) {
+        User user = new User();
+        user.setCreated(LocalDate.now());
+        BeanUtils.copyProperties(dto, user);
+        repository.save(user);
+        return 1;
+    }
 
     @Override
-    public User save(UserRegistrationDto registrationDto) {
-        User user=new User(registrationDto.getName(), registrationDto.getEmail(), registrationDto.getPassword(), registrationDto.getRoles());
-        return userRepository.save(user);
-      
+    public UserDto login(LoginDto dto) throws UserNotFoundException {
+        Optional<User> op = repository.findByUserNameAndPassword(dto.getUserName(), dto.getPassword());
+        User user = op.orElseThrow(() -> new UserNotFoundException("User Not Found"));
+          
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(user, userDto);
+
+        return userDto;
     }
-    
 }

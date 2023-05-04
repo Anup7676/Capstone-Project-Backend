@@ -1,4 +1,4 @@
-package com.anu.project.dto;
+package com.anu.project.util;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class AppResponse<T> {
+    
     private String sts;
     private String msg;
     private T bd;
