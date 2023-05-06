@@ -1,0 +1,25 @@
+### Create New Job  
+POST http://localhost:8080/jobpost/ HTTP/1.1 
+content-type: application/json
+
+{
+
+"jobTitle" : "Sr.Developer", "jobDescription" : "pqr", "location" : "Mysore", "industry" : "ZZ", "qualification":"Msc", "applicationRequirement":"aaa,xxx,ggg", "postedDate":"1994-08-15"
+}
+
+### Get All Jobs 
+GET http://localhost:8080/jobpost/
+
+### Delete Job By Id 
+DELETE http://localhost:8080/jobpost/1
+
+### Get Job By Id 
+GET http://localhost:8080/jobpost/2
+
+### Update Job
+PUT http://localhost:8080/jobpost/ HTTP/1.1 
+content-type: application/json
+
+{
+"jobTitle" : "zwr", "jobDescription" : "xyz", "location" : "98", "industry" : "xyz", "qualification":"be", "applicationRequirement":"w,x,y", "postedDate":"2000-02-12"
+}
