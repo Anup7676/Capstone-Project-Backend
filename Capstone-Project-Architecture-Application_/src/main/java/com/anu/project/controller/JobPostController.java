@@ -70,6 +70,19 @@ public class JobPostController {
         return ResponseEntity.status(200).body(response);
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<AppResponse<JobPostingDto>> getJobById(@PathVariable Long id) {
+
+        final JobPostingDto dto = service.fetchJobDetails(id);
+
+        final AppResponse<JobPostingDto> response = AppResponse.<JobPostingDto>builder()
+                                                        .sts("success")
+                                                        .msg("JonPost Details")
+                                                        .bd(dto)
+                                                        .build();
+        return ResponseEntity.ok().body(response);
+    }
+
     @CrossOrigin
     @PutMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AppResponse<Integer>> updateNewInvoice(@RequestBody JobPostingDto dto) {

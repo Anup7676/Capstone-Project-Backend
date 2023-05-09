@@ -11,10 +11,10 @@ content-type: application/json
 GET http://localhost:8080/jobpost/
 
 ### Delete Job By Id 
-DELETE http://localhost:8080/jobpost/1
+DELETE http://localhost:8080/jobpost/
 
 ### Get Job By Id 
-GET http://localhost:8080/jobpost/2
+GET http://localhost:8080/jobpost/14
 
 ### Update Job
 PUT http://localhost:8080/jobpost/ HTTP/1.1 
