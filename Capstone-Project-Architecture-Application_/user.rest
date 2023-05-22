@@ -13,3 +13,17 @@ content-type: application/json
 {
 "userName" : "anup", "password" : "anup123"
 }
+
+### Create New user Application
+
+POST http://localhost:8080/user/1/jobpost/2 HTTP/1.1 
+content-type: application/json
+
+### Get a user Applications
+
+GET http://localhost:8080/user/getuserApplication/1
+
+
+### Get a user Application history
+
+GET http://localhost:8080/user/getApplicationhistory/1

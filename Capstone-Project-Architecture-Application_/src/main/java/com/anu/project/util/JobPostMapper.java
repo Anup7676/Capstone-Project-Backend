@@ -8,16 +8,16 @@ import com.anu.project.dto.JobPostingDto;
 @Component
 public class JobPostMapper {
     public JobPosting toDomain(JobPostingDto jobpostingDto){
-        return new JobPosting(
-            jobpostingDto.getId(),
-            jobpostingDto.getJobTitle(),
-            jobpostingDto.getJobDescription(),
-            jobpostingDto.getLocation(),
-            jobpostingDto.getIndustry(),
-            jobpostingDto.getQualification(),
-            jobpostingDto.getApplicationRequirement(),
-            jobpostingDto.getPostedDate()
-            );
+        return JobPosting.builder()
+            .id(jobpostingDto.getId())
+            .jobTitle(jobpostingDto.getJobTitle())
+            .jobDescription(jobpostingDto.getJobDescription())
+            .location(jobpostingDto.getLocation())
+            .industry(jobpostingDto.getIndustry())
+            .qualification(jobpostingDto.getQualification())
+            .applicationRequirement(jobpostingDto.getApplicationRequirement())
+            .postedDate(jobpostingDto.getPostedDate())
+            .build();
 
     }
     public JobPostingDto toDto(JobPosting domain){

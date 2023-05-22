@@ -1,15 +1,21 @@
 package com.anu.project.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.anu.project.dto.ApplicationDto;
 import com.anu.project.dto.CreateUserDto;
 import com.anu.project.dto.LoginDto;
 import com.anu.project.dto.UserDto;
@@ -50,6 +56,42 @@ public class UserController {
                                                 .build();
 
         return ResponseEntity.ok().body(res);
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/{userId}/jobpost/{jobPostId}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AppResponse<Integer>> newApplication(@Valid @PathVariable Long userId, @PathVariable Long jobPostId) {
+        Integer sts = service.createJobApplication(userId, jobPostId);
+        AppResponse<Integer> response = AppResponse.<Integer>builder()
+                .sts("success")
+                .msg("new Job Applied successfully.")
+                .bd(sts)
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+    @CrossOrigin
+    @GetMapping(value = "/getuserApplication/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AppResponse<List<ApplicationDto>>> findAll(@PathVariable Long userId) {
+        List<ApplicationDto> sts=service.getAllApplicattions(userId);
+        AppResponse<List<ApplicationDto>> response=AppResponse.<List<ApplicationDto>>builder()
+                    .sts("success")
+                    .msg("All  Application")
+                    .bd(sts)
+                    .build();
+              return ResponseEntity.ok().body(response);
+
+
+    }
+
+    @GetMapping(value = "/getApplicationhistory/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AppResponse<List<ApplicationDto>>> findAllHistory(@PathVariable Long userId) {
+        List<ApplicationDto> sts=service.getApplicationHistory(userId);
+        AppResponse<List<ApplicationDto>> response=AppResponse.<List<ApplicationDto>>builder()
+                    .sts("success")
+                    .msg("All Application history")
+                    .bd(sts)
+                    .build();
+              return ResponseEntity.ok().body(response);
     }
 }
 
