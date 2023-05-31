@@ -1,6 +1,8 @@
 package com.anu.project.repository;
 
+import java.util.List;
 import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.anu.project.domain.User;
@@ -8,5 +10,9 @@ import com.anu.project.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     
-    Optional<User> findByUserNameAndPassword(String userName, String password);
+    Optional<User> findByEmailAndPassword(String email, String password);
+    Optional<User> findByEmail(String email);
+    List<User> findAllByEmail(String email);
+    boolean existsByEmail(String email);
+
 }

@@ -1,44 +1,52 @@
 package com.anu.project.domain;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.*;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 @Entity
 public class User {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long userId;
+    private Long id;
+    
+    @NotNull(message = "Email should not be null")
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Invalid Email")
+    private String email;
 
-    @Column(unique = true, nullable = false)
-    private String userName;
-
-    @Column(nullable = false)
+    @NotNull(message = "Password should not be null")
+    @NotBlank(message = "Password is mandatory")
     private String password;
 
-    @Column(nullable = false)
+    @NotNull(message = "Role should not be null")
+    @NotBlank(message = "Role is mandatory")
     private String role;
-    
-    private LocalDate created;
 
-    @ManyToMany(mappedBy="users",cascade=CascadeType.ALL)
-    private List<JobPosting> jobPosting=new ArrayList<>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+        name = "user_application",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "job_post_id")
+    )
+    private List<JobPosting> jobPostings;
+
 }

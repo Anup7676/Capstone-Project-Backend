@@ -1,25 +1,32 @@
-### Create New Job  
-POST http://localhost:8080/jobpost/ HTTP/1.1 
-content-type: application/json
+### Create New Event 
+POST http://localhost:8080/admin/newjob HTTP/1.1 
+Content-Type: application/json
+
+{ "jobTitle" : "zwr",
+"jobDescription" : "xyz", "location" : "98", "industry" : "abc", "qualification":"be", "applicationRequirement":"w,x,y", "postedDate":"2023-11-04"
+
+}
+### Get All Craeted Events 
+GET http://localhost:8080/admin/jobs
+
+### Get Event By Passing ID 
+GET http://localhost:8080/admin/jobs/2
+
+### Delete Event By ID 
+DELETE http://localhost:8080/admin/jobs/1
+
+### Update Event 
+PUT http://localhost:8080/admin/updatejob HTTP/1.1 
+Content-Type: application/json
 
 {
-
-"jobTitle" : "Sr.Developer", "jobDescription" : "pqr", "location" : "Mysore", "industry" : "ZZ", "qualification":"Msc", "applicationRequirement":"aaa,xxx,ggg", "postedDate":"1994-08-15"
+"id":2, "jobTitle" : "abc", "jobDescription" : "xyz", "location" : "98", "industry" : "abc", "qualification":"be", "applicationRequirement":"w,x,y", "postedDate":"2023-11-04"
 }
 
-### Get All Jobs 
-GET http://localhost:8080/jobpost/
+### Get all userJobs
 
-### Delete Job By Id 
-DELETE http://localhost:8080/jobpost/
+GET http://localhost:8080/admin/alluserJobs
 
-### Get Job By Id 
-GET http://localhost:8080/jobpost/14
+### Get all userJob for specific user by useremail
 
-### Update Job
-PUT http://localhost:8080/jobpost/ HTTP/1.1 
-content-type: application/json
-
-{
-"jobTitle" : "zwr", "jobDescription" : "xyz", "location" : "98", "industry" : "xyz", "qualification":"be", "applicationRequirement":"w,x,y", "postedDate":"2000-02-12"
-}
+GET http://localhost:8080/admin/filterbyemail?email=Manu@123
